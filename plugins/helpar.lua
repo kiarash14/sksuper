@@ -34,9 +34,11 @@ function run(msg, matches)
 ▫️/close | open name 
 ▫️/close | open photo 
 ▫️/close | open member 
-▫️/close | open spam 
+▫️/close | open image
 ▫️/close | open sticker 
-▫️/close | open antilink
+▫️/close | open link
+▫️/close | open file
+▫️/close | open chat
 ▫️/group settings :- اضهار اعدادات المجموعة
 ➖➖➖➖➖➖➖➖➖➖
 ▫️/silent :- منع العضو من التكلم
