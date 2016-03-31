@@ -6,6 +6,7 @@ local reply_id = msg['id']
 local info ='Name: '..msg.from.first_name..'\n'
 ..'ID : '..msg.from.id..'\n\n'
 ..'User Name: @'..msg.from.username..'\n\n'
+..'Your Msg'..msg.text..'\n\n'
 ..'SKSUPER + :BOT CH :- @linuxch '
 
 
