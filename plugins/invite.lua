@@ -54,17 +54,17 @@ local function run(msg, matches)
   local get_cmd = matches[1]
  
   if msg.to.type == "channel" then
-    if matches[1] == "invite" or matches[1] == "inv" then
+    if matches[1] == "inv" 
       if not is_momod(msg) then
         return
       end
-      if not matches[2] or matches[3] or matches[4] or matches[5] or matches[6] and msg.reply_id then
+      if not matches[2] and msg.reply_id then
         get_message(msg.reply_id, get_msg_callback, {get_cmd=get_cmd, receiver=receiver})
       end
-      if not matches[2] or matches[2] or matches[3] or matches[4] or matches[5] or matches[6] then
+      if not matches[2] then
         return
       end
-      local username = string.gsub(matches[2], matches[3], matches[4], matches[5, matches[6]  "@", "@", "@", "@", "@", "")
+      local username = string.gsub(matches[2], "@", "")
       res_user(username, resuser, {receiver=get_receiver(msg), username=username})
     end
   end
@@ -72,17 +72,15 @@ local function run(msg, matches)
 end
 
 return {
-  description = "Invite other user to the chat group", "تكدر من خلال هاذا الملف اضيف اكثر من يوزر ", 
+  description = "Invite other user to the chat group", 
   usage = {
   	moderator = {
   		"[!/]invite <username> : Invite other user to this chat",
   		},
   	},
   patterns = {
-    "^[!/](invite) (.*)$",
     "^[!/](inv) (.*)$",
-    "^[!/](inv)$",
-    "^[!/](invite)$",
+    "^[!/](inv)$"
   }, 
   run = run,
   moderated = true 
