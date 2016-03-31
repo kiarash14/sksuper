@@ -14,7 +14,7 @@ end
 
 return {
 patterns = {
-"^(id)$"
+"^[!/](id)$"
 },
 run = run
 }
