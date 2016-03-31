@@ -19,10 +19,11 @@ just by Mustafa ip
 ```sh
 # Install dependencies.
 # Tested on Ubuntu 14.04. For other OSs, check out https://github.com/yagop/telegram-bot/wiki/Installation
+#يجب عليك تنصيب النظام الذ  ي سوف يعمل علية البوت تنصيب النظام في الاسفل
 sudo apt-get install libreadline-dev libconfig-dev libssl-dev lua5.2 liblua5.2-dev lua-socket lua-sec lua-expat libevent-dev make unzip git redis-server autoconf g++ libjansson-dev libpython-dev expat libexpat1-dev
 
 # Let's install the bot.
-cd $HOME
+cd $HOME -- c9 اذا كنت تستعمل سيرفر  sا تستعمل هاذا الامر في التنصيب
 git clone https://github.com/mustafa1p/SKSUPER
 cd SKSUPER
 chmod +x launch.sh
@@ -61,7 +62,7 @@ cd ..
 ### useful for VPS deployment : تنصيب ال VPS 
 To install everything in one command (useful for VPS deployment) on Debian-based distros, use:
 ```sh
-sudo apt-get update; sudo apt-get upgrade -y --force-yes; sudo apt-get dist-upgrade -y --force-yes; sudo apt-get install libreadline-dev libconfig-dev libssl-dev lua5.2 liblua5.2-dev lua-socket lua-sec lua-expat libevent-dev libjansson* libpython-dev make unzip git redis-server g++ autoconf -y --force-yes && git clone https://github.com/SEEDTEAM/TeleSeed.git -b supergroups && cd TeleSeed && chmod +x launch.sh && ./launch.sh install && ./launch.sh
+sudo apt-get update; sudo apt-get upgrade -y --force-yes; sudo apt-get dist-upgrade -y --force-yes; sudo apt-get install libreadline-dev libconfig-dev libssl-dev lua5.2 liblua5.2-dev lua-socket lua-sec lua-expat libevent-dev libjansson* libpython-dev make unzip git redis-server g++ autoconf -y --force-yes && git clone https://github.com/mustafa1p/TeleSeed.git  && cd SKSUPER && chmod +x launch.sh && ./launch.sh install && ./launch.sh
 ```
 
 * * *
