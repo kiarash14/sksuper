@@ -52,9 +52,13 @@ end
 local function run(msg, matches)
   local receiver = get_receiver(msg)
   local get_cmd = matches[1]
- 
+  if msg.to.type == "chat" then
+    local chat = "chat#id"..msg.to.id
+    resolve_username(username, resuser, {receiver=get_receiver(msg), username=username})
+  end
+  
   if msg.to.type == "channel" then
-    if matches[1] == "inv" 
+    if matches[1] == "invite" then
       if not is_momod(msg) then
         return
       end
@@ -75,12 +79,12 @@ return {
   description = "Invite other user to the chat group", 
   usage = {
   	moderator = {
-  		"[!/]invite <username> : Invite other user to this chat",
+  		"!invite <username> : Invite other user to this chat",
   		},
   	},
   patterns = {
-    "^[!/](inv) (.*)$",
-    "^[!/](inv)$"
+    "^/(invite) (.*)$",
+    "^/(invite)$",
   }, 
   run = run,
   moderated = true 
