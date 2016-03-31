@@ -217,6 +217,8 @@ function create_config( )
       "invite",
       "moderation",
       "mute_mod",
+      "mute_audio",
+      "helpar",
       "membercontrol"
       },
     sudo_users = {178159688,0,tonumber(our_id)},--SUDO BOT  : ايدي المطورين
