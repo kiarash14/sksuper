@@ -59,7 +59,25 @@ sudo luarocks install
 ./launch.sh install
 
 ./launch.sh
+
+##or install bot by this
+##او يمكنك التنصيب بطريقه اخرى
+
+cd SKSUPER
+./launch.sh install
+cd .luarocks
+cd bin 
+./luarocks-5.2 install luafilesystem
+./luarocks-5.2 install lub
+./luarocks-5.2 install luaexpat
+cd ..
+cd ..
+./launch.sh install
+./.luarocks/bin/luarocks install lbase64 20120807-3
+./launch.sh install
 ```
+
+
 
 ### useful for VPS deployment : تنصيب ال VPS 
 To install everything in one command (useful for VPS deployment) on Debian-based distros, use:
