@@ -369,61 +369,6 @@ local function unlock_group_image(msg, data)
     end
 end
 
---[[local function lock_group_video(msg, data)
-    if not is_momod(msg) then
-        return "For moderators only!"
-    end
-    local group_video_lock = data[tostring(msg.to.id)]['settings']['lock_sticker']
-    if group_video_lock == 'yes' then
-        return 'Anti sticker already enabled'
-    else
-        data[tostring(msg.to.id)]['settings']['lock_sticker'] = 'yes'
-        save_data(_config.moderation.data, data)
-    end
-    return 'Anti sticker has been enabled'
-end
-
-local function unlock_group_video(msg, data)
-    if not is_momod(msg) then
-        return "For moderators only!"
-    end
-    local group_video_lock = data[tostring(msg.to.id)]['settings']['lock_sticker']
-    if group_video_lock == 'no' then
-        return 'Anti sticker is not enabled'
-    else
-        data[tostring(msg.to.id)]['settings']['lock_sticker'] = 'no'
-        save_data(_config.moderation.data, data)
-    return 'Anti sticker has been disabled'
-    end
-end
-
-local function lock_group_audio(msg, data)
-    if not is_momod(msg) then
-        return "For moderators only!"
-    end
-    local group_audio_lock = data[tostring(msg.to.id)]['settings']['lock_audio']
-    if group_audio_lock == 'yes' then
-        return 'Lock audio already enabled'
-    else
-        data[tostring(msg.to.id)]['settings']['lock_audio'] = 'yes'
-        save_data(_config.moderation.data, data)
-    end
-    return 'Lock audio has been enabled'
-end
-
-local function unlock_group_audio(msg, data)
-    if not is_momod(msg) then
-        return "For moderators only!"
-    end
-    local group_audio_lock = data[tostring(msg.to.id)]['settings']['lock_audio']
-    if group_audio_lock == 'no' then
-        return 'Lock audio is not enabled'
-    else
-        data[tostring(msg.to.id)]['settings']['lock_audio'] = 'no'
-        save_data(_config.moderation.data, data)
-    return 'Lock audio has been disabled'
-    end
-end]]
 
 local function lock_group_file(msg, data)
     if not is_momod(msg) then
@@ -976,18 +921,6 @@ function run(msg, matches)
                 --end
             end
             if matches[1] == 'open' then --group unlock *
-                --[[if matches[2] == 'name' then
-                    return unlock_group_name(msg, data)
-                end
-                if matches[2] == 'member' then
-                    return unlock_group_member(msg, data)
-                end
-                if matches[2] == 'photo' then
-                    return unlock_group_photo(msg, data)
-                end
-                if matches[2] == 'bot' then
-                	return unlock_group_bot(msg, data)
-                end]]
                 if matches[2] == 'link' then
                 	return unlock_group_link(msg, data)
                 end
