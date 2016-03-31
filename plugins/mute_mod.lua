@@ -9,7 +9,7 @@
 
 do
 local function pre_process(msg)
-if is_momod(msg) then
+if not is_momod(msg) then
 return 
 else
 if msg then
