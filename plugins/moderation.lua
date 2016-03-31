@@ -335,16 +335,12 @@ local function modlist(msg)
   if next(data[tostring(msg.to.id)]['moderators']) == nil then --fix way
     return 'No moderator in this group.'
   end
-  local message = 'List of moderators for  \n' .. string.gsub(msg.to.id, '_', ' ') .. ':\n\n'
+  local message = 'List of moderators for ' .. string.gsub(msg.to.print_name, '_', ' ') .. ':\n'
   for k,v in pairs(data[tostring(msg.to.id)]['moderators']) do
     if is_spromoted(msg.to.id, k) then
-      message = message .. '1-  @'..v..' [' ..k.. '] * \n'
+      message = message .. '- @'..v..' [' ..k.. '] * \n'
     else
-         message = message .. '2-  @'..v..' [' ..k.. '] * \n'
-else 
-     message = message .. '3-  @'..v..' [' ..k.. '] * \n'
-    else
-      message = message .. '4-  @'..v..' [' ..k.. '] \n'
+      message = message .. '- @'..v..' [' ..k.. '] \n'
     end
   end
 
