@@ -1,20 +1,21 @@
-do
-local function run(msg, matches)
-local bot_id = our_id 
-local receiver = get_receiver(msg)
-    if matches[1] == 'sksuperout' and is_admin1(msg) then
-      leave_channel(receiver, ok_cb, false)
-    elseif msg.service and msg.action.type == "chat_add_user" and msg.action.user.id == tonumber(bot_id) and not is_admin1(msg) then
-      send_large_msg(receiver, '⚠️ : server-SKSUPER + (Locked server)\nمرحباً : Welcome.\n🚨 انت غير مسموح لك باضافتي الى هنا وداعاً', ok_cb, false)
-      leave_channel(receiver, ok_cb, false)
-    end
+local function callback(extra, success, result)
+  vardump(success)
+  vardump(result)
 end
- 
+
+local function run(msg)
+  if msg.service and msg.action.type == 'chat_add_user' or msg.action.type == 'channel_add_user' then
+    local data = load_data(_config.moderation.data)
+    if not data[tostring(msg.to.id)] then
+      print "This is not our group. Leaving..."
+      channel_kick_user('channel#id'..msg.to.id, 'user#id'..our_id, callback, false)
+    end
+  end
+end
+
 return {
   patterns = {
-    "^[!/](sksuperout)$",
-    "^!!tgservice (.+)$",
+    "^!!tgservice (.+)$"
   },
   run = run
 }
-end
