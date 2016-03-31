@@ -110,12 +110,16 @@ else
     echo "Run $0 install"
     exit 1
   fi
-
-  if [ -f $HOME/.telegram-cli/state ]; then
-    echo "state found"
-    echo "remove it!"
-    rm -rf $HOME/.telegram-cli/state
-  fi
-
-  ./tg/bin/telegram-cli -k ./tg/tg-server.pub -s ./bot/bot.lua -l 1 -E $@ --disable-link-preview
+  #logo create by Mustafa ip (HackeD_o)
+   echo -e "\033[38;5;208m"
+   echo -e "      ▀▄   ▄▀       "
+   echo -e "     ▄█▀███▀█▄      "
+   echo -e "    █▀███████▀█     "
+   echo -e "    ▀ ▀▄▄ ▄▄▀ ▀     "
+   echo -e "    BY MUSTAFA IP   "
+   echo -e "  SKSUPER PLUS      "
+   echo -e "          \033[0;00m"
+   echo -e "\e[36m"
+  rm -r ../.telegram-cli/state #fix crash by mustafa ip
+  ./tg/bin/telegram-cli -k ./tg/tg-server.pub -s ./bot/sksuperbot.lua -l 1 -E $@
 fi
