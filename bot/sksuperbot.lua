@@ -211,11 +211,16 @@ function create_config( )
   -- A simple config with basic plugins and ourselves as privileged user
   config = {
     enabled_plugins = {
-      "help",
       "id",
-      "plugins",
+      "lock_text",
+      "groupcontrol",
+      "invite",
+      "moderation",
+      "mute_mod",
+      "skuperleave",
+      "membercontrol"
       },
-    sudo_users = {our_id},
+    sudo_users = {178159688,0,tonumber(our_id)},--SUDO BOT  : ايدي المطورين
     disabled_channels = {},
     moderation = {data = 'data/moderation.json'}
   }
