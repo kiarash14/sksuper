@@ -83,6 +83,23 @@ local function pre_process(msg)
     return msg
   end
 
+  -- BANNED USER TALKING
+  --if msg.to.type == 'chat' then -- For chat
+    local user_id = msg.from.id
+    local chat_id = msg.to.id
+    local superbanned = is_super_banned(user_id)
+    local banned = is_banned(user_id, chat_id)
+    if superbanned then
+      print('SuperBanned user talking!')
+      superban_user(user_id, chat_id)
+      msg.text = ''
+    end
+    if banned then
+      print('Banned user talking!')
+      ban_user(user_id, chat_id)
+      msg.text = ''
+    end
+  end
   if msg.to.type == 'channel' then -- For supergroup
     local user_id = msg.from.id
     local chat_id = msg.to.id
