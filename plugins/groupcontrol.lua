@@ -369,61 +369,6 @@ local function unlock_group_image(msg, data)
     end
 end
 
---[[local function lock_group_video(msg, data)
-    if not is_momod(msg) then
-        return "For moderators only!"
-    end
-    local group_video_lock = data[tostring(msg.to.id)]['settings']['lock_sticker']
-    if group_video_lock == 'yes' then
-        return 'Anti sticker already enabled'
-    else
-        data[tostring(msg.to.id)]['settings']['lock_sticker'] = 'yes'
-        save_data(_config.moderation.data, data)
-    end
-    return 'Anti sticker has been enabled'
-end
-
-local function unlock_group_video(msg, data)
-    if not is_momod(msg) then
-        return "For moderators only!"
-    end
-    local group_video_lock = data[tostring(msg.to.id)]['settings']['lock_sticker']
-    if group_video_lock == 'no' then
-        return 'Anti sticker is not enabled'
-    else
-        data[tostring(msg.to.id)]['settings']['lock_sticker'] = 'no'
-        save_data(_config.moderation.data, data)
-    return 'Anti sticker has been disabled'
-    end
-end
-
-local function lock_group_audio(msg, data)
-    if not is_momod(msg) then
-        return "For moderators only!"
-    end
-    local group_audio_lock = data[tostring(msg.to.id)]['settings']['lock_audio']
-    if group_audio_lock == 'yes' then
-        return 'Lock audio already enabled'
-    else
-        data[tostring(msg.to.id)]['settings']['lock_audio'] = 'yes'
-        save_data(_config.moderation.data, data)
-    end
-    return 'Lock audio has been enabled'
-end
-
-local function unlock_group_audio(msg, data)
-    if not is_momod(msg) then
-        return "For moderators only!"
-    end
-    local group_audio_lock = data[tostring(msg.to.id)]['settings']['lock_audio']
-    if group_audio_lock == 'no' then
-        return 'Lock audio is not enabled'
-    else
-        data[tostring(msg.to.id)]['settings']['lock_audio'] = 'no'
-        save_data(_config.moderation.data, data)
-    return 'Lock audio has been disabled'
-    end
-end]]
 
 local function lock_group_file(msg, data)
     if not is_momod(msg) then
@@ -517,6 +462,24 @@ local function pre_process(msg)
     if not msg.text and msg.media then
     	msg.text = '['..msg.media.type..']'
     end
+    if msg.to.type == 'chat' then
+        local receiver = get_receiver(msg)
+        -- spam detector
+        local hash = 'floodc:'..msg.from.id..':'..msg.to.id
+        redis:incr(hash)
+        if msg.from.type == 'user' then
+            local hash = 'user:'..msg.from.id..':floodc'
+            local msgs = tonumber(redis:get(hash) or 0)
+            if msgs > NUM_MSG_MAX then
+                if not is_momod(msg) then
+                    send_large_msg(receiver, 'Don\'t spam!')
+                    chat_del_user(receiver, 'user#id'..msg.from.id, ok_cb, true)
+                    msg = nil
+                    return nil
+                end
+            end
+            redis:setex(hash, TIME_CHECK, msgs+1)
+        end
         -- end spam detect
         local data = load_data(_config.moderation.data)
         if not data[tostring(msg.to.id)] then
@@ -528,7 +491,7 @@ local function pre_process(msg)
             if action == 'chat_rename' then
                 local group_name_set = settings.set_name
                 local group_name_lock = settings.lock_name
-                local to_rename = 'channel#id'..msg.to.id
+                local to_rename = 'chat#id'..msg.to.id
                 if group_name_lock == 'yes' then
                     if group_name_set ~= tostring(msg.to.print_name) then
                         rename_chat(to_rename, group_name_set, ok_cb, false)
@@ -547,8 +510,9 @@ local function pre_process(msg)
                     local kick_a = chat_del_user(receiver, user_id, ok_cb, true)
                     local kick_b = chat_del_user(receiver, 'user#id'..msg.from.id, ok_cb, true)
                 end
-                if action == 'chat_add_user' or action == 'channel_add_user' and msg.action.user.flags == 1 then 
+                if action == 'chat_add_user' and msg.action.user.flags == 1 then -- NEED FIX
                 	if settings.lock_bot == 'yes' and not is_momod(msg) then
+                		--chat_del_user(receiver, user_id, ok_cb, true)
                 	end
                 end
             end
@@ -607,7 +571,7 @@ local function pre_process(msg)
     	end
         return msg
     end
-    if msg.to.type == 'channel' then -- THIS IS SUPERGROUP FIXED 
+    if msg.to.type == 'channel' then -- THIS IS SUPERGROUPPPPPPPPPPPPPPPPPPPPP
         local receiver = get_receiver(msg)
         -- spam detect
         local hash = 'floodc:'..msg.from.id..':'..msg.to.id
@@ -649,6 +613,7 @@ local function pre_process(msg)
                 end
                 if action == 'chat_add_user' and msg.action.user.flags == 1 then -- Need fix
                 	if settings.lock_bot == 'yes' and not is_momod(msg) then
+                	    --channel_kick_user(receiver, user_id, ok_cb, true)
                 	end
                 end
             end
@@ -790,6 +755,9 @@ function run(msg, matches)
                 if matches[2] == 'photo' then
                     return lock_group_photo(msg, data)
                 end
+                --if matches[2] == 'bot' then
+                --	return lock_group_bot(msg, data)
+                --end
                 if matches[2] == 'link' then
                 	return lock_group_link(msg, data)
                 end
@@ -805,6 +773,9 @@ function run(msg, matches)
                 if matches[2] == 'file' then
                 	return lock_group_file(msg, data)
                 end
+                --if matches[2] == 'chat' then
+                --	return lock_group_chat(msg, data)
+                --end
                 if matches[2] == 'all' then
                 	return lock_group_all(msg, data)
                 end
@@ -819,6 +790,9 @@ function run(msg, matches)
                 if matches[2] == 'photo' then
                     return unlock_group_photo(msg, data)
                 end
+                --if matches[2] == 'bot' then
+                --	return unlock_group_bot(msg, data)
+                --end
                 if matches[2] == 'link' then
                 	return unlock_group_link(msg, data)
                 end
@@ -834,6 +808,9 @@ function run(msg, matches)
                 if matches[2] == 'file' then
                 	return unlock_group_file(msg, data)
                 end
+                --if matches[2] == 'chat' then
+                --	return unlock_group_chat(msg, data)
+                --end
                 if matches[2] == 'all' then
                 	return unlock_group_all(msg, data)
                 end
@@ -909,6 +886,18 @@ function run(msg, matches)
                 return get_rules(msg, data)
             end
             if matches[1] == 'close' then --group lock *
+                --[[if matches[2] == 'name' then
+                    return lock_group_name(msg, data)
+                end
+                if matches[2] == 'member' then
+                    return lock_group_member(msg, data)
+                end
+                if matches[2] == 'photo' then
+                    return lock_group_photo(msg, data)
+                end
+                if matches[2] == 'bot' then
+                	return lock_group_bot(msg, data)
+                end]]
                 if matches[2] == 'link' then
                 	return lock_group_link(msg, data)
                 end
@@ -927,6 +916,9 @@ function run(msg, matches)
                 if matches[2] == 'chat' then
                 	return lock_group_talk(msg, data)
                 end
+                --if matches[2] == 'all' then
+                --	return lock_group_all(msg, data)
+                --end
             end
             if matches[1] == 'open' then --group unlock *
                 if matches[2] == 'link' then
@@ -947,11 +939,26 @@ function run(msg, matches)
                 if matches[2] == 'chat' then
                     return unlock_group_talk(msg, data)
                 end
+                --if matches[2] == 'all' then
+                --	return unlock_group_all(msg, data)
+                --end
             end
             if matches[1] == 'group' and matches[2] == 'settings' then
                 return show_group_settings(msg, data)
             end
-            
+            --[[if matches[1] == 'setname' and is_momod(msg) then
+                local new_name = string.gsub(matches[2], '_', ' ')
+                data[tostring(msg.to.id)]['settings']['set_name'] = new_name
+                save_data(_config.moderation.data, data) 
+                local group_name_set = data[tostring(msg.to.id)]['settings']['set_name']
+                local to_rename = 'chat#id'..msg.to.id
+                rename_chat(to_rename, group_name_set, ok_cb, false)
+            end
+            if matches[1] == 'setphoto' and is_momod(msg) then
+                data[tostring(msg.to.id)]['settings']['set_photo'] = 'waiting'
+                save_data(_config.moderation.data, data)
+                return 'Please send me new group photo now'
+            end]]
         end
     else
         if matches[1] == 'join' and matches[2] then
