@@ -34,27 +34,31 @@ chmod +x launch.sh
 ```sh
 cd SKSUPER
 
+sudo luarocks install 30log
+
+sudo luarocks install abelhas
+
+sudo luarocks install serpent
+
+sudo luarocks install feedparser
+
+sudo luarocks install lua-cjson
+
+sudo luarocks install luasec
+
+sudo luarocks install luasocket
+
+sudo luarocks install luafilesystem
+
+sudo luarocks install luacrypto
+
+sudo luarocks install luaexpat
+
+sudo luarocks install
+
 ./launch.sh install
 
-cd .luarocks
-
-cd bin 
-
-./luarocks-5.2 install luafilesystem
-
-./luarocks-5.2 install lub
-
-./luarocks-5.2 install luaexpat
-
-cd ..
-
-cd ..
-
-./launch.sh install
-
-./.luarocks/bin/luarocks install lbase64 20120807-3
-
-./launch.sh install
+./launch.sh
 ```
 
 ### useful for VPS deployment : تنصيب ال VPS 
