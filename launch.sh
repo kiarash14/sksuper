@@ -121,5 +121,5 @@ else
    echo -e "          \033[0;00m"
    echo -e "\e[36m"
   rm -r ../.telegram-cli/state #fix crash by mustafa ip
-  ./tg/bin/telegram-cli -k ./tg/tg-server.pub -s ./sksuperbot/sksuperbot.lua -l 1 -E $@
+  ./tg/bin/telegram-cli -k ./tg/tg-server.pub -s ./bot/sksuperbot.lua -l 1 -E $@
 fi
