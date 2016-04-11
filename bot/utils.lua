@@ -2,9 +2,9 @@ URL = require "socket.url"
 http = require "socket.http"
 https = require "ssl.https"
 ltn12 = require "ltn12"
-serpent = require "serpent"
-feedparser = require "feedparser"
 
+serpent = (loadfile "./libs/serpent.lua")()
+feedparser = (loadfile "./libs/feedparser.lua")()
 json = (loadfile "./libs/JSON.lua")()
 mimetype = (loadfile "./libs/mimetype.lua")()
 redis = (loadfile "./libs/redis.lua")()
@@ -493,9 +493,9 @@ function send_order_msg_callback(cb_extra, success, result)
          send_document(destination, nmsg, send_order_msg_callback, new_cb_extra)
       elseif typ == 'image' or typ == 'photo' then
          send_photo(destination, nmsg, send_order_msg_callback, new_cb_extra)
-      elseif typ == 'audio' then
+      elseif typ == 'audio' or typ == 'mp3' then
          send_audio(destination, nmsg, send_order_msg_callback, new_cb_extra)
-      elseif typ == 'video' then
+      elseif typ == 'video' or typ == 'mp4' then
          send_video(destination, nmsg, send_order_msg_callback, new_cb_extra)
       else
          send_file(destination, nmsg, send_order_msg_callback, new_cb_extra)
