@@ -3,54 +3,54 @@ do
 function run(msg, matches)
  return 
  [[
-➖➖SKSUPERCommands➖➖
-▫️/promote :- رفع ادمن
-▫️/demote :- انزل ادمن
-▫️/spromote :- رفع مشرف
-▫️/sdemote :- تنزيل مشرف
-▫️/upmanger  :- رفع ادمن خارق
-▫️/inmanger  :- تنزيل ادمن خارق
-▫️/adminprom :- اضافة مطور
-▫️/admindem :- ازالة مطور
-▫️/adminlist :- قائمة الاداريين
-▫️/block <word>:- حظر كلمة
-▫️/unblock <word>:- الغاء حضر كلمة
+➖➖SceneManaher mmands➖➖
+▫ ️/promote :Promote
+▫ ️/demote :-Demote 
+▫ ️/spromote :-Set Owner 
+▫ ️/sdemote :-Deamote for owner
+▫ ️/upmanger  :- Raise addicted supernatural
+▫ ️/inmanger  :-Download addicted supernatural
+▫ ️/adminprom :-Add developer
+▫ ️/admindem :-Remove developer
+▫ ️/adminlist :-List administrators
+▫ ️/block <word>:- Ban the word
+▫ ️/unblock <word>:-Cancel the word ban
 ➖➖➖➖➖➖➖➖➖➖
-▫️/kick :- طرد عضو
-▫️/kickme :- للخروج من المجموعة
-▫️/ban :- حظر
-▫️/unban :- الغاء حظر
-▫️/sban :- حظر خارق
-▫️/unsban :- الغاء الحظر الخارق
-▫️/invite :- اضافة عضو
-▫️/setrules :- اضافة قوانين
-▫️/setphoto :- وضع صورة للمجموعة
-▫️/setname :- وضع اسم للمجموعة
-▫️/setabout :- ضع وصف للسوبر
-▫️/rules :- اضهار قوانين السوبر
-▫️/getlink :- جلب رابط المجموعة
-▫️/relink :- وضع رابط جديد
+▫ ️/kick :-The expulsion of a member of
+▫ ️/kickme :-Out of the group
+▫ ️/ban :- Ban for Group
+▫ ️/unban :-Unban for Group
+▫ ️/sban :-Prohibition supernatural
+▫ ️/unsban :-Cancel ban Ripper
+▫ ️/invite :-Invite Peoplel
+▫ ️/setrules :-Set Rules
+▫ ️/setphoto :-Put a picture of the group
+▫ ️/setname :-Set name Group
+▫ ️/setabout :- Set About Group
+▫ ️/rules :-Show rules
+▫ ️/getlink :-Send Link in pv
+▫ /️newelink :-Create New link and send pv
 ➖➖➖➖➖➖➖➖➖➖
-▫️/close | open name 
-▫️/close | open photo 
-▫️/close | open member 
-▫️/close | open image
-▫️/close | open sticker 
-▫️/close | open link
-▫️/close | open file
-▫️/close | open chat
-▫️/group settings :- اضهار اعدادات المجموعة
+▫ /️️+(lock) |-(unlock) name 
+▫ /️️+(lock) |-(unlock) photo 
+▫ /️️+(lock) |-(unlock) member 
+▫ /️️+(lock) |-(unlock) image
+▫ /️️+(lock) |-(unlock)n sticker 
+▫ /️️+(lock) |-(unlock) link
+▫ /️️+(lock) |-(unlock) file
+▫ /️+(lock) |-(unlock) chat
+▫ ️/gp settings :-Show the settings of the total
 ➖➖➖➖➖➖➖➖➖➖
-▫️/silent :- منع العضو من التكلم
-▫️/unsilent :- السماح للعضو بالتكلم
-▫️/muteall :- غلق الدردشة
-▫️/unmuteall :- فتح الدردشة
-▫️/ltext :- منع النصوص
-▫️/unltext :- فتح النصوص
-▫️/lockaudio :- منع الصوتيات
-▫️/unlockaudio :- السماح بالصوتيات
+▫️ /silent :-Prevent the user from speaking
+▫ ️/unsilent :-Allowing the member to speak
+▫️ /muteall :-Close the chat
+▫ ️/unmuteall :-Open a chat
+▫ ️/ltext :-Prevent texts
+▫ ️/unltext :-Open texts
+▫ ️/lockaudio :-Prevent acoustics
+▫ ️/unlockaudio : -Allowing Balsotiet
 ➖➖➖➖➖➖➖➖➖➖
-Channel create bot : ~ @Linuxch
+Channel create bot : ~ @SceneCh
 ]]
 end
 
